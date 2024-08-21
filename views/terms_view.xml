@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_school_terms_tree" model="ir.ui.view">
+        <field name="name">school.terms.tree</field>
+        <field name="model">school.terms</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="term_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_school_terms_form" model="ir.ui.view">
+        <field name="name">school.terms.form</field>
+        <field name="model">school.terms</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="term_name"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_terms_search" model="ir.ui.view">
+        <field name="name">school.terms.search</field>
+        <field name="model">school.terms</field>
+        <field name="arch" type="xml">
+            <search>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="action_school_terms" model="ir.actions.act_window">
+        <field name="name">Terms</field>
+        <field name="res_model">school.terms</field>
+        <field name="context">{}</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Your First Subject !
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_terms"
+        name="Terms"
+        sequence="0"
+        parent="menu_subjects_master"
+        action="action_school_terms"/>
+
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_school_subjects_tree" model="ir.ui.view">
+        <field name="name">school.subjects.tree</field>
+        <field name="model">school.subjects</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1">
+                <field name="subject_name"/>
+                <field name="stage"/>
+                <field name="subjects_term"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_school_subjects_form" model="ir.ui.view">
+        <field name="name">school.subjects.form</field>
+        <field name="model">school.subjects</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="subject_name"/>
+                            <field name="stage"/>
+                            <field name="grade"/>
+                            <field name="subjects_term"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                    </group>
+                </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                 </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_subjects_search" model="ir.ui.view">
+        <field name="name">school.subjects.search</field>
+        <field name="model">school.subjects</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="subject_name"/>
+                <filter name="kg_filter" string="KG Subjects" domain="[('stage','=','KG')]"/>
+                <filter name="primary_filter" string="primary Subjects" domain="[('stage','=','Primary')]"/>
+                <filter name="middle_filter" string="Middle Subjects" domain="[('stage','=','Middle')]"/>
+                <filter name="secondary_filter" string="Secondary Subjects" domain="[('stage','=','Secondary')]"/>
+                <separator/>
+                <filter name="term1_filter" string="First Term" domain="[('subjects_term','=','First Term')]"/>
+                <filter name="term2_filter" string="Second Term" domain="[('subjects_term','=','Second Term')]"/>
+                <group>
+                    <filter name="stage_group_by" string="Stages" context="{'group_by':'stage'}"/>
+                    <filter name="term_group_by" string="Term" context="{'group_by':'subjects_term'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_school_subject" model="ir.actions.act_window">
+        <field name="name">Subjects</field>
+        <field name="res_model">school.subjects</field>
+        <field name="context">{}</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Your First Subject !
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_subject"
+        name="Subjects"
+        sequence="0"
+        parent="menu_subjects_master"
+        action="action_school_subject"/>
+
+</odoo>

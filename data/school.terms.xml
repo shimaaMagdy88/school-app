@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<odoo>
+<!--    <record id="first_term" model="school.terms">-->
+<!--        <field name="term_name">First Term</field>-->
+<!--    </record>-->
+
+<!--    <record id="second_term" model="school.terms">-->
+<!--        <field name="term_name">Second Term</field>-->
+<!--    </record>-->
+</odoo>

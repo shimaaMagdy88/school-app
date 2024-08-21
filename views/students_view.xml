@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_school_students_tree" model="ir.ui.view">
+        <field name="name">school.students.tree</field>
+        <field name="model">school.students</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+<!--                <field name="age"/>-->
+                <field name="stage"/>
+                <field name="grade"/>
+                <field name="state" widget="badge" decoration-danger="state == 'cancel'" decoration-success="state == 'confirm'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_school_students_form" model="ir.ui.view">
+        <field name="name">school.students.form</field>
+        <field name="model">school.students</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="object_confirm" string="Confirm" type="object" class="oe_highlight" states="draft"
+                            confirm = 'Are You Sure That You Want To Confirm?'/>
+                    <button name="object_cancel" string="Cancel" type="object" states="draft"
+                            confirm = 'Are You Sure That You Want To Cancel this Student?'/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <group>
+                        <group>
+                            <field name="name" attrs="{'readonly':[('state','=','confirm')]}"/>
+<!--                            <field name="birthdate" attrs="{'readonly':[('state','=','confirm')]}"/>-->
+                            <field name="address" attrs="{'readonly':[('state','=','confirm')]}"/>
+                            <field name="parent" attrs="{'readonly':[('state','=','confirm')]}"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+<!--                            <field name="show_age" widget="boolean_toggle"/>-->
+<!--                            <field name="age" attrs="{'readonly':[('state','=','confirm')],-->
+<!--                                                        'invisible':[('show_age','=',True)]}"/>-->
+<!--                            <field name="detailed_age" attrs="{'readonly':[('state','=','confirm')],-->
+<!--                                                                'invisible':[('show_age','=',False)]}"/>-->
+                            <field name="phone" attrs="{'readonly':[('state','=','confirm')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="stage"/>
+                            <field name="grade"/>
+                            <field name="term" widget="radio"/>
+                            <field name="subjects" widget="many2many_tags" options="{'color_field':'color'}"
+                                   attrs="{'invisible':[('term','=',False)]}"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                </sheet>
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                 </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_students_search" model="ir.ui.view">
+        <field name="name">school.students.search</field>
+        <field name="model">school.students</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+<!--                <filter name="primary_filter" string="Primary Stage" domain="[('stage','=','primary')]"/>-->
+<!--                <filter name="middle_filter" string="Middle Stage" domain="[('stage','=','middle')]"/>-->
+<!--                <filter name="secondary_filter" string="secondary Stage" domain="[('stage','=','secondary')]"/>-->
+                <filter name="active_filter" string="Archived" domain="[('active','=',False)]"/>
+                <group>
+<!--                    <filter name="group_by_stage" string="Stages" context="{'group_by':'stage'}"/>-->
+<!--                    <filter name="group_by_birthdate" string="Birthdate" context="{'group_by':'birthdate'}"/>-->
+                    <filter name="group_by_state" string="State" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_school_student" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">school.students</field>
+        <field name="context">{}</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Your First Student !
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_students"
+        name="Students"
+        sequence="0"
+        parent="menu_students_master"
+        action="action_school_student"/>
+
+</odoo>

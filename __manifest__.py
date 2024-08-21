@@ -1,0 +1,27 @@
+
+{
+    'name': 'School Management',
+    'version': '1.0.0',
+    'summary': 'school management system',
+    'sequence': -10,
+    'description': """school management system""",
+    'category': 'School',
+    'depends': ['mail'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/school.stages.csv',
+        'data/school.terms.csv',
+        'data/school.terms.xml',
+        'views/menus.xml',
+        'views/students_view.xml',
+        'views/subjects_view.xml',
+        'views/stages_view.xml',
+        'views/grades_view.xml',
+        'views/terms_view.xml',
+    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'assets': {},
+    'license': 'LGPL-3',
+}
